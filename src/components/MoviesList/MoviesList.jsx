@@ -3,7 +3,14 @@ import { Grid } from "@mui/material";
 import useStyles from "./styles";
 const MoviesList = ({ movies }) => {
   const classes = useStyles();
-  return <div>MoviesList</div>;
+  return (
+    <Grid container className={classes.moviesContainer}>
+      {/* {movies.results.map((movie, i) => (
+        <Movie key={i} movie={movie} i={i} />
+      ))} */}
+      check
+    </Grid>
+  );
 };
 
 export default MoviesList;
