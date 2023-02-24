@@ -17,7 +17,7 @@ const NavBar = () => {
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           {isMobile && (
-            <IconButton color="inherit" edge="start" style={{ outline: "none" }} onClick={() => {}} className={classes.menuButton}>
+            <IconButton color="inherit" edge="start" style={{ outline: "none" }} onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)} className={classes.menuButton}>
               <Menu />
             </IconButton>
           )}
@@ -44,7 +44,7 @@ const NavBar = () => {
       <div>
         <nav className={classes.drawer}>
           {isMobile ? (
-            <Drawer variant="temporary" anchor="right" open={mobileOpen} classes={{ paper: classes.drawerPaper }} ModalProps={{ keepMounted: true }}>
+            <Drawer variant="temporary" anchor="right" open={mobileOpen} classes={{ paper: classes.drawerPaper }} ModalProps={{ keepMounted: true }} onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}>
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           ) : (
