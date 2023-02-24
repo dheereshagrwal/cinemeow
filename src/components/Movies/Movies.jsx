@@ -6,36 +6,36 @@ import { MoviesList } from "..";
 
 const Movies = () => {
   const { data, error, isFetching } = useGetMoviesQuery();
-  // if (isFetching) {
-  //   return (
-  //     <Box display="flex" justifyContent="center">
-  //       <CircularProgress size="4rem" />
-  //     </Box>
-  //   );
-  // }
-  // if (!data.results.length) {
-  //   return (
-  //     <Box display="flex" alignItems="center" mt="20px">
-  //       <Typography variant="h4">
-  //         No movies found
-  //         <br />
-  //         Please search for another movie
-  //       </Typography>
-  //     </Box>
-  //   );
-  // }
-  // if (error) {
-  //   return (
-  //     <Box display="flex" alignItems="center" mt="20px">
-  //       <Typography variant="h4">
-  //         Error fetching movies
-  //         <br />
-  //         Please try again
-  //       </Typography>
-  //     </Box>
-  //   );
-  // }
-  console.log(data);
+  if (isFetching) {
+    return (
+      <Box display="flex" justifyContent="center">
+        <CircularProgress size="4rem" />
+      </Box>
+    );
+  }
+  if (!data.results.length) {
+    return (
+      <Box display="flex" alignItems="center" mt="20px">
+        <Typography variant="h4">
+          No movies found
+          <br />
+          Please search for another movie
+        </Typography>
+      </Box>
+    );
+  }
+  if (error) {
+    return (
+      <Box display="flex" alignItems="center" mt="20px">
+        <Typography variant="h4">
+          Error fetching movies
+          <br />
+          Please try again
+        </Typography>
+      </Box>
+    );
+  }
+  console.log("data is", data);
   return (
     <div>
       <MoviesList movies={data} />
