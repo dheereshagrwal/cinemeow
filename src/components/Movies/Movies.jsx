@@ -35,7 +35,6 @@ const Movies = () => {
       </Box>
     );
   }
-  console.log("data is", data);
   return (
     <div>
       <MoviesList movies={data} />
