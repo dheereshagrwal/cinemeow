@@ -4,8 +4,7 @@ import { Menu, AccountCircle, Brightness4, Brightness7 } from "@mui/icons-materi
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useStyles from "./styles";
-import { Sidebar } from "..";
-import {Search} from "..";
+import { Sidebar, Search } from "..";
 
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);

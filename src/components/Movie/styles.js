@@ -26,13 +26,12 @@ export default makeStyles((theme) => ({
   title: {
     color: theme.palette.text.primary,
     textOverflow: "ellipsis",
-    width: "230px",
     whiteSpace: "nowrap",
     overflow: "hidden",
     marginTop: "10px",
     marginBottom: 0,
-    textAlign: "center",
     fontFamily: "sora, sans-serif",
+    textAlign: "center",
   },
   rating: {
     display: "flex",

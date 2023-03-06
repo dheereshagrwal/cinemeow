@@ -16,7 +16,6 @@ const categories = [
   { label: "Upcoming", value: "upcoming" },
 ];
 const Sidebar = () => {
-
   const theme = useTheme();
   const classes = useStyles();
   const { data, isFetching } = useGetGenresQuery();
@@ -35,7 +34,7 @@ const Sidebar = () => {
               <ListItemIcon>
                 <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
               </ListItemIcon>
-              <ListItemText primary={label} />
+              <ListItemText disableTypography primary={label} className={classes.categoryText} />
             </ListItemButton>
           </Link>
         ))}
@@ -54,7 +53,7 @@ const Sidebar = () => {
                 <ListItemIcon>
                   <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
                 </ListItemIcon>
-                <ListItemText primary={name} />
+                <ListItemText disableTypography primary={name} className={classes.genreText} />
               </ListItemButton>
             </Link>
           ))
