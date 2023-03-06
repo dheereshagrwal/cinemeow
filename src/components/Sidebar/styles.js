@@ -17,8 +17,10 @@ export default makeStyles((theme) => ({
   },
   categoryText: {
     fontFamily: "epilogue, sans-serif",
+    fontSize: "0.9rem",
   },
   genreText: {
     fontFamily: "epilogue, sans-serif",
+    fontSize: "0.9rem",
   },
 }));
