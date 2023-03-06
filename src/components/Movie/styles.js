@@ -16,7 +16,7 @@ export default makeStyles((theme) => ({
     },
   },
   image: {
-    borderRadius: "10px",
+    borderRadius: "20px",
     height: "300px",
     marginBottom: "10px",
     "&:hover": {
@@ -32,7 +32,7 @@ export default makeStyles((theme) => ({
     marginTop: "10px",
     marginBottom: 0,
     textAlign: "center",
-    // fontSize: "16px !important",
+    fontFamily: "sora, sans-serif",
   },
   rating: {
     display: "flex",

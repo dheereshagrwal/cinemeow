@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useStyles from "./styles";
 import { useGetGenresQuery } from "../../services/TMDB";
+import { useDispatch, useSelector } from "react-redux";
 import genreIcons from "../../assets/genres";
+import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+
 const lightLogo = "https://iili.io/HMoPKzu.png";
 const darkLogo = "https://iili.io/HMoiYu9.png";
 const categories = [
@@ -13,10 +16,11 @@ const categories = [
   { label: "Upcoming", value: "upcoming" },
 ];
 const Sidebar = () => {
+
   const theme = useTheme();
   const classes = useStyles();
   const { data, isFetching } = useGetGenresQuery();
-  console.log(data);
+  const dispatch = useDispatch();
   return (
     <>
       <Link to="/" className={classes.imageLink}>
@@ -27,7 +31,7 @@ const Sidebar = () => {
         <ListSubheader>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
-            <ListItemButton onClick={() => {}}>
+            <ListItemButton onClick={() => dispatch(selectGenreOrCategory(value))}>
               <ListItemIcon>
                 <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
               </ListItemIcon>
@@ -46,7 +50,7 @@ const Sidebar = () => {
         ) : (
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
-              <ListItemButton onClick={() => {}}>
+              <ListItemButton onClick={() => dispatch(selectGenreOrCategory(id))}>
                 <ListItemIcon>
                   <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
                 </ListItemIcon>
