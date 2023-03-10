@@ -15,16 +15,20 @@ const categories = [
   { label: "Top Rated", value: "top_rated" },
   { label: "Upcoming", value: "upcoming" },
 ];
+
 const Sidebar = () => {
-  const [selectedGenreOrCategory, setSelectedGenreOrCategory] = useState(null);
+  const [selectedGenreOrCategory, setSelectedGenreOrCategory] = useState();
   const theme = useTheme();
   const classes = useStyles();
   const { data, isFetching } = useGetGenresQuery();
   const dispatch = useDispatch();
+  const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
+
   const handleGenreOrCategoryClick = (value) => {
     setSelectedGenreOrCategory(value);
     dispatch(selectGenreOrCategory(value));
   };
+
   return (
     <>
       <Link to="/" className={classes.imageLink}>
@@ -35,7 +39,7 @@ const Sidebar = () => {
         <ListSubheader style={{ fontFamily: "sora, sans-serif", fontSize: "0.8rem" }}>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
-            <ListItemButton selected={selectedGenreOrCategory === value} onClick={() => handleGenreOrCategoryClick(value)}>
+            <ListItemButton selected={genreIdOrCategoryName === value} onClick={() => handleGenreOrCategoryClick(value)}>
               <ListItemIcon>
                 <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
               </ListItemIcon>
@@ -54,7 +58,7 @@ const Sidebar = () => {
         ) : (
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
-              <ListItemButton selected={selectedGenreOrCategory === id} onClick={() => handleGenreOrCategoryClick(id)}>
+              <ListItemButton selected={genreIdOrCategoryName === id} onClick={() => handleGenreOrCategoryClick(id)}>
                 <ListItemIcon>
                   <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
                 </ListItemIcon>

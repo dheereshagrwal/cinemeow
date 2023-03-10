@@ -139,7 +139,10 @@ const MovieInformation = () => {
       </Box>
       {/* <Modal></Modal> */}
     </Grid>
+    
   );
+  
+          
 };
 
 export default MovieInformation;
