@@ -3,17 +3,30 @@ import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, us
 import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from "@mui/icons-material";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { useGetMovieQuery } from "../../services/TMDB";
+import { useGetMovieQuery, useGetRecommendationsQuery } from "../../services/TMDB";
 import useStyles from "./styles";
 import genreIcons from "../../assets/genres";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+import { MoviesList } from "..";
 
 const MovieInformation = () => {
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ movie_id: id, list: "/recommendations" });
+  console.log("recommendations", recommendations);
+  const isMovieInFavorites = false;
+  const isMovieInWatchlist = false;
+  const addToFavorites = () => {
+    console.log("add to favorites");
+  };
+
+  const addToWatchlist = () => {
+    console.log("add to watchlist");
+  };
 
   if (isFetching) {
     return (
@@ -85,7 +98,46 @@ const MovieInformation = () => {
                 )
             )}
         </Grid>
+        <Grid item container style={{ marginTop: "2rem" }}>
+          <div className={classes.buttonsContainer}>
+            <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
+              <ButtonGroup variant="outlined" size="medium">
+                <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>
+                  Website
+                </Button>
+                <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>
+                  IMDB
+                </Button>
+                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>
+                  Trailer
+                </Button>
+              </ButtonGroup>
+            </Grid>
+            <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
+              <ButtonGroup variant="outlined" size="medium">
+                <Button onClick={addToFavorites} href="#" endIcon={isMovieInFavorites ? <FavoriteBorderOutlined /> : <Favorite />}>
+                  {isMovieInFavorites ? "Unfavorite" : "Favorite"}
+                </Button>
+                <Button onClick={addToWatchlist} href="#" endIcon={isMovieInWatchlist ? <Remove /> : <PlusOne />}>
+                  watchlist
+                </Button>
+                <Button sx={{ borderColor: "primary.main" }} endIcon={<ArrowBack />}>
+                  <Typography component={Link} to="/" color="inherit" variant="subtitle2" style={{ textDecoration: "none" }}>
+                    Back
+                  </Typography>
+                </Button>
+              </ButtonGroup>
+            </Grid>
+          </div>
+        </Grid>
       </Grid>
+      <Box marginTop="5rem" width="100%">
+        <Typography variant="h5" gutterBottom align="center">
+          You might also like
+        </Typography>
+        {recommendations?.results?.length ? <MoviesList movies={recommendations} numberOfMovies={12} /> : <Box> No recommendations </Box>}
+      </Box>
+      {/* <Modal></Modal> */}
     </Grid>
   );
 };

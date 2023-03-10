@@ -32,7 +32,7 @@ const Sidebar = () => {
       </Link>
       <Divider />
       <List>
-        <ListSubheader>Categories</ListSubheader>
+        <ListSubheader style={{ fontFamily: "sora, sans-serif", fontSize: "0.8rem" }}>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
             <ListItemButton selected={selectedGenreOrCategory === value} onClick={() => handleGenreOrCategoryClick(value)}>
@@ -46,7 +46,7 @@ const Sidebar = () => {
       </List>
       <Divider />
       <List>
-        <ListSubheader>Genres</ListSubheader>
+        <ListSubheader style={{ fontFamily: "sora, sans-serif", fontSize: "0.8rem" }}>Genres</ListSubheader>
         {isFetching ? (
           <Box display="flex" justifyContent="center">
             <CircularProgress />

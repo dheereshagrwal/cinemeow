@@ -20,8 +20,8 @@ export default makeStyles((theme) => ({
     fontSize: "0.9rem",
   },
   genreText: {
+    // fontFamily: "Meows, sans-serif",
     fontFamily: "epilogue, sans-serif",
     fontSize: "0.9rem",
   },
-
 }));
