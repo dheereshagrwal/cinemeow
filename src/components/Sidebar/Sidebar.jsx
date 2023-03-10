@@ -28,7 +28,7 @@ const Sidebar = () => {
   return (
     <>
       <Link to="/" className={classes.imageLink}>
-        <img className={classes.image} src={theme.palette.mode === "light" ? lightLogo : darkLogo} alt="Filmrec logo" />
+        <img className={classes.image} src={theme.palette.mode === "light" ? lightLogo : darkLogo} alt="cinemeow logo" />
       </Link>
       <Divider />
       <List>
