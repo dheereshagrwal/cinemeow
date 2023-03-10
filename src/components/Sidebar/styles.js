@@ -23,4 +23,5 @@ export default makeStyles((theme) => ({
     fontFamily: "epilogue, sans-serif",
     fontSize: "0.9rem",
   },
+
 }));

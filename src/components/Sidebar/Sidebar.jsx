@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress, ListItemButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
@@ -16,10 +16,15 @@ const categories = [
   { label: "Upcoming", value: "upcoming" },
 ];
 const Sidebar = () => {
+  const [selectedGenreOrCategory, setSelectedGenreOrCategory] = useState(null);
   const theme = useTheme();
   const classes = useStyles();
   const { data, isFetching } = useGetGenresQuery();
   const dispatch = useDispatch();
+  const handleGenreOrCategoryClick = (value) => {
+    setSelectedGenreOrCategory(value);
+    dispatch(selectGenreOrCategory(value));
+  };
   return (
     <>
       <Link to="/" className={classes.imageLink}>
@@ -30,7 +35,7 @@ const Sidebar = () => {
         <ListSubheader>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
-            <ListItemButton onClick={() => dispatch(selectGenreOrCategory(value))}>
+            <ListItemButton selected={selectedGenreOrCategory === value} onClick={() => handleGenreOrCategoryClick(value)}>
               <ListItemIcon>
                 <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
               </ListItemIcon>
@@ -49,7 +54,7 @@ const Sidebar = () => {
         ) : (
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
-              <ListItemButton onClick={() => dispatch(selectGenreOrCategory(id))}>
+              <ListItemButton selected={selectedGenreOrCategory === id} onClick={() => handleGenreOrCategoryClick(id)}>
                 <ListItemIcon>
                   <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
                 </ListItemIcon>
