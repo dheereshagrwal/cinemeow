@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, CircularProgress, useMediaQuery, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../services/TMDB";
-import { MoviesList } from "..";
+import { MoviesList, Pagination } from "..";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 
 const Movies = () => {
@@ -41,6 +41,7 @@ const Movies = () => {
   return (
     <div>
       <MoviesList movies={data} />
+      <Pagination />
     </div>
   );
 };

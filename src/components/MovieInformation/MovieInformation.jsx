@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, useMediaQuery, Rating, collapseClasses } from "@mui/material";
 import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from "@mui/icons-material";
 import { Link, useParams } from "react-router-dom";
@@ -15,9 +15,8 @@ const MovieInformation = () => {
   const { data, isFetching, error } = useGetMovieQuery(id);
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const [open, setOpen] = useState(false);
   const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ movie_id: id, list: "/recommendations" });
-  console.log("recommendations", recommendations);
   const isMovieInFavorites = false;
   const isMovieInWatchlist = false;
   const addToFavorites = () => {
@@ -69,7 +68,7 @@ const MovieInformation = () => {
         <Grid item className={classes.genresContainer}>
           {data?.genres?.map((genre) => (
             <Link key={genre?.name} className={classes.links} to="/" onClick={() => dispatch(selectGenreOrCategory(genre.id))}>
-              <img src={genreIcons[genre?.name.toLowerCase()]} className={classes.genreImage} height={30} />
+              <img src={genreIcons[genre?.name.toLowerCase()]} className={classes.genreImage} height={30} alt="genreIcon" />
               <Typography color="textPrimary" variant="subtitle1">
                 {genre?.name}
               </Typography>
@@ -108,7 +107,7 @@ const MovieInformation = () => {
                 <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>
                   IMDB
                 </Button>
-                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>
+                <Button onClick={() => setOpen(true)} href="#" endIcon={<Theaters />}>
                   Trailer
                 </Button>
               </ButtonGroup>
@@ -137,12 +136,11 @@ const MovieInformation = () => {
         </Typography>
         {recommendations?.results?.length ? <MoviesList movies={recommendations} numberOfMovies={12} /> : <Box> No recommendations </Box>}
       </Box>
-      {/* <Modal></Modal> */}
+      <Modal closeAfterTransition className={classes.modal} open={open} onClose={() => setOpen(false)}>
+        {data.videos?.results?.length > 0 && <iframe autoPlay className={classes.video} style={{ border: 0 }} title="Trailer" src={`https://www.youtube.com/embed/${data.videos?.results[0]?.key}`} />}
+      </Modal>
     </Grid>
-    
   );
-  
-          
 };
 
 export default MovieInformation;
