@@ -4,10 +4,10 @@ import { useHistory, useParams } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import { useGetActorDetailsQuery, useGetMoviesByActorQuery } from "../../services/TMDB";
 import useStyles from "./styles";
-import { MoviesList } from "..";
+import { MoviesList, Pagination } from "..";
 const Actors = () => {
   const { id } = useParams();
-  const page = 1;
+  const [page, setPage] = useState(1);
   const history = useHistory();
   const { data: actor, isFetching, error } = useGetActorDetailsQuery(id);
   const { data: movies } = useGetMoviesByActorQuery({ id, page });
@@ -60,6 +60,7 @@ const Actors = () => {
           Movies
         </Typography>
         {movies && <MoviesList movies={movies} numberOfMovies={12} />}
+        <Pagination currentPage={page} setPage={setPage} totalPages={movies?.total_pages} />
       </Box>
     </>
   );
