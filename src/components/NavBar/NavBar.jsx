@@ -22,6 +22,7 @@ import { Sidebar, Search } from "..";
 import { fetchToken, createSessionId, moviesApi } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, userSelector } from "../../features/auth";
+import { useGetUserProfileDetailsQuery } from "../../services/TMDB";
 const NavBar = () => {
   const { isAuthenticated, user } = useSelector(userSelector);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -32,6 +33,14 @@ const NavBar = () => {
   const colorMode = useContext(ColorModeContext);
   const token = localStorage.getItem("request_token");
   const sessionIdFromLocalStorage = localStorage.getItem("session_id");
+
+  const { data: userProfileDetails } = useGetUserProfileDetailsQuery({
+    accountId: user?.id,
+    sessionId: sessionIdFromLocalStorage,
+  });
+  const gravatarHash = userProfileDetails?.avatar?.gravatar?.hash;
+  console.log("gravatarHash", gravatarHash);
+
   useEffect(() => {
     const logInUser = async () => {
       if (token) {
@@ -87,13 +96,10 @@ const NavBar = () => {
                 component={Link}
                 to={`/profiles/${user.id}`}
                 className={classes.linkButton}
-                onClick={() => {}}
               >
-                {!isMobile && <>My Movies &nbsp;</>}
                 <Avatar
-                  alt="Profile"
-                  src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
-                  style={{ width: 30, height: 30 }}
+                  alt="dp"
+                  src={`https://www.gravatar.com/avatar/${gravatarHash}?s=400`}
                 />
               </Button>
             )}
