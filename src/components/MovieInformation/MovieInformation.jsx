@@ -135,7 +135,7 @@ const MovieInformation = () => {
           variant="h3"
           align="center"
           gutterBottom
-          style={{ fontFamily: "epilogue, sans-serif" }}
+          style={{ fontFamily: "sora, sans-serif" }}
         >
           {data?.title} ({data?.release_date?.split("-")[0]})
         </Typography>
@@ -147,6 +147,7 @@ const MovieInformation = () => {
         >
           {data?.tagline}
         </Typography>
+        <br />
         <Grid item className={classes.containerSpaceAround}>
           <Box display="flex" align="center">
             <Rating value={data?.vote_average / 2} readOnly />
@@ -198,6 +199,7 @@ const MovieInformation = () => {
             </Link>
           ))}
         </Grid>
+        <br />
         <Typography
           variant="h5"
           gutterBottom
