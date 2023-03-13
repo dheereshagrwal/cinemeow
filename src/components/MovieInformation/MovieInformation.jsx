@@ -34,6 +34,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { MoviesList } from "..";
 import { userSelector } from "../../features/auth";
+import frown from "../../assets/images/frown.png";
 const MovieInformation = () => {
   const history = useHistory();
   const { user } = useSelector(userSelector);
@@ -336,13 +337,23 @@ const MovieInformation = () => {
             fontFamily: "epilogue, sans-serif",
           }}
         >
-          Paw-sibly of interest to you
+          {recommendations?.results?.length
+            ? "Paw-sibly of interest to you"
+            : "No Recommendations"}
         </Typography>
         <br />
         {recommendations?.results?.length ? (
           <MoviesList movies={recommendations} numberOfMovies={12} />
         ) : (
-          <Box> No recommendations </Box>
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img src={frown} alt="no recommendations" width="20%" />
+          </Box>
         )}
       </Box>
       <Modal

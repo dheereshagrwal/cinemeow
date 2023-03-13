@@ -5,6 +5,8 @@ import { userSelector } from "../../features/auth";
 import { ExitToApp } from "@mui/icons-material";
 import { useGetListQuery } from "../../services/TMDB";
 import { RatedCards } from "..";
+import catHeartbreak from "../../assets/images/cat-heartbreak.png";
+
 const Profile = () => {
   const { user } = useSelector(userSelector);
   const { data: favoriteMovies, refetch: refetchFavoriteMovies } =
@@ -55,17 +57,32 @@ const Profile = () => {
           <ExitToApp />
         </Button>
       </Box>
+      <br />
+      <br />
       {!favoriteMovies?.results?.length && !watchlistMovies?.results?.length ? (
-        <Typography
-          variant="body1"
-          style={{
-            fontFamily: "epilogue, sans-serif",
-          }}
-        >
-          Add favorites to see them here!
-        </Typography>
+        <Box>
+          <Typography
+            variant="body1"
+            style={{
+              fontFamily: "epilogue, sans-serif",
+            }}
+            align="center"
+          >
+            Paws off! No favorites yet. Add them now.
+          </Typography>
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img src={catHeartbreak} alt="no recommendations" width="20%" />
+          </Box>
+        </Box>
       ) : (
         <Box>
+          <br />
           <RatedCards title="Favorite Meowies" data={favoriteMovies} />
           <RatedCards title="Watchlist Meowies" data={watchlistMovies} />
         </Box>
