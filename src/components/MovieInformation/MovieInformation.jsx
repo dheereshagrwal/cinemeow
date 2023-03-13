@@ -1,9 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, useMediaQuery, Rating, collapseClasses } from "@mui/material";
-import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from "@mui/icons-material";
-import { Link, useParams } from "react-router-dom";
+import {
+  Modal,
+  Typography,
+  Button,
+  ButtonGroup,
+  Grid,
+  Box,
+  CircularProgress,
+  useMediaQuery,
+  Rating,
+  collapseClasses,
+} from "@mui/material";
+import {
+  Movie as MovieIcon,
+  Theaters,
+  Language,
+  PlusOne,
+  Favorite,
+  FavoriteBorderOutlined,
+  Remove,
+  ArrowBack,
+} from "@mui/icons-material";
+import { Link, useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import { useGetMovieQuery, useGetRecommendationsQuery, useGetListQuery } from "../../services/TMDB";
+import {
+  useGetMovieQuery,
+  useGetRecommendationsQuery,
+  useGetListQuery,
+} from "../../services/TMDB";
 import useStyles from "./styles";
 import genreIcons from "../../assets/genres";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +35,7 @@ import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { MoviesList } from "..";
 import { userSelector } from "../../features/auth";
 const MovieInformation = () => {
+  const history = useHistory();
   const { user } = useSelector(userSelector);
   const { id } = useParams();
   const classes = useStyles();
@@ -18,28 +43,53 @@ const MovieInformation = () => {
   const [open, setOpen] = useState(false);
 
   const { data, isFetching, error } = useGetMovieQuery(id);
-  const { data: favoriteMovies } = useGetListQuery({ listName: "favorite/movies", accountId: user.id, sessionId: localStorage.getItem("session_id"), page: 1 });
-  const { data: watchlistMovies } = useGetListQuery({ listName: "watchlist/movies", accountId: user.id, sessionId: localStorage.getItem("session_id"), page: 1 });
-  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ movie_id: id, list: "/recommendations" });
+  const { data: favoriteMovies } = useGetListQuery({
+    listName: "favorite/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1,
+  });
+  const { data: watchlistMovies } = useGetListQuery({
+    listName: "watchlist/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1,
+  });
+  const { data: recommendations, isFetching: isRecommendationsFetching } =
+    useGetRecommendationsQuery({ movie_id: id, list: "/recommendations" });
 
   const [isMovieInFavorites, setIsMovieInFavorites] = useState(false);
   const [isMovieInWatchlist, setIsMovieInWatchlist] = useState(false);
 
   useEffect(() => {
-    setIsMovieInFavorites(!!favoriteMovies?.results?.find((movie) => movie.id === data?.id));
+    setIsMovieInFavorites(
+      !!favoriteMovies?.results?.find((movie) => movie.id === data?.id)
+    );
   }, [favoriteMovies, data]);
 
   useEffect(() => {
-    setIsMovieInWatchlist(!!watchlistMovies?.results?.find((movie) => movie.id === data?.id));
+    setIsMovieInWatchlist(
+      !!watchlistMovies?.results?.find((movie) => movie.id === data?.id)
+    );
   }, [watchlistMovies, data]);
 
   const addToFavorites = async () => {
-    await axios.post(`https://api.themoviedb.org/3/account/${user.id}/favorite?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${localStorage.getItem("session_id")}`, { media_type: "movie", media_id: id, favorite: !isMovieInFavorites });
+    await axios.post(
+      `https://api.themoviedb.org/3/account/${user.id}/favorite?api_key=${
+        process.env.REACT_APP_TMDB_KEY
+      }&session_id=${localStorage.getItem("session_id")}`,
+      { media_type: "movie", media_id: id, favorite: !isMovieInFavorites }
+    );
     setIsMovieInFavorites((prev) => !prev);
   };
 
   const addToWatchlist = () => {
-    axios.post(`https://api.themoviedb.org/3/account/${user.id}/watchlist?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${localStorage.getItem("session_id")}`, { media_type: "movie", media_id: id, watchlist: !isMovieInWatchlist });
+    axios.post(
+      `https://api.themoviedb.org/3/account/${user.id}/watchlist?api_key=${
+        process.env.REACT_APP_TMDB_KEY
+      }&session_id=${localStorage.getItem("session_id")}`,
+      { media_type: "movie", media_id: id, watchlist: !isMovieInWatchlist }
+    );
     setIsMovieInWatchlist((prev) => !prev);
   };
 
@@ -60,12 +110,12 @@ const MovieInformation = () => {
 
   return (
     <Grid container className={classes.containerSpaceAround}>
-      <Grid
-        item
-        xs={12}
-        lg={4}
-      >
-        <img className={classes.poster} src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`} alt={data?.title} />
+      <Grid item xs={12} lg={4}>
+        <img
+          className={classes.poster}
+          src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`}
+          alt={data?.title}
+        />
       </Grid>
       <Grid item container direction="column" lg={7}>
         <Typography variant="h3" align="center" gutterBottom>
@@ -77,18 +127,36 @@ const MovieInformation = () => {
         <Grid item className={classes.containerSpaceAround}>
           <Box display="flex" align="center">
             <Rating value={data?.vote_average / 2} readOnly />
-            <Typography variant="subtitle1" align="center" gutterBottom style={{ marginLeft: "10px" }}>
+            <Typography
+              variant="subtitle1"
+              align="center"
+              gutterBottom
+              style={{ marginLeft: "10px" }}
+            >
               {data?.vote_average} / 10
             </Typography>
           </Box>
           <Typography variant="h6" align="center" gutterBottom>
-            {data?.runtime} min | {data?.spoken_languages?.map((language) => language.name).join(", ")}
+            {data?.runtime} min |{" "}
+            {data?.spoken_languages
+              ?.map((language) => language.name)
+              .join(", ")}
           </Typography>
         </Grid>
         <Grid item className={classes.genresContainer}>
           {data?.genres?.map((genre) => (
-            <Link key={genre?.name} className={classes.links} to="/" onClick={() => dispatch(selectGenreOrCategory(genre.id))}>
-              <img src={genreIcons[genre?.name.toLowerCase()]} className={classes.genreImage} height={30} alt="genreIcon" />
+            <Link
+              key={genre?.name}
+              className={classes.links}
+              to="/"
+              onClick={() => dispatch(selectGenreOrCategory(genre.id))}
+            >
+              <img
+                src={genreIcons[genre?.name.toLowerCase()]}
+                className={classes.genreImage}
+                height={30}
+                alt="genreIcon"
+              />
               <Typography color="textPrimary" variant="subtitle1">
                 {genre?.name}
               </Typography>
@@ -109,10 +177,26 @@ const MovieInformation = () => {
             data.credits?.cast?.slice(0, 6).map(
               (character, i) =>
                 character.profile_path && (
-                  <Grid key={i} item xs={4} md={2} component={Link} to={`/actors/${character.id}`} style={{ textDecoration: "none" }}>
-                    <img src={`https://image.tmdb.org/t/p/w500${character?.profile_path}`} alt={character?.name} className={classes.castImage} />
-                    <Typography color="textPrimary">{character?.name}</Typography>
-                    <Typography color="textSecondary">{character?.character}</Typography>
+                  <Grid
+                    key={i}
+                    item
+                    xs={4}
+                    md={2}
+                    component={Link}
+                    to={`/actors/${character.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${character?.profile_path}`}
+                      alt={character?.name}
+                      className={classes.castImage}
+                    />
+                    <Typography color="textPrimary">
+                      {character?.name}
+                    </Typography>
+                    <Typography color="textSecondary">
+                      {character?.character}
+                    </Typography>
                   </Grid>
                 )
             )}
@@ -121,27 +205,64 @@ const MovieInformation = () => {
           <div className={classes.buttonsContainer}>
             <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
               <ButtonGroup variant="outlined" size="medium">
-                <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>
+                <Button
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={data?.homepage}
+                  endIcon={<Language />}
+                >
                   Website
                 </Button>
-                <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>
+                <Button
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://www.imdb.com/title/${data?.imdb_id}`}
+                  endIcon={<MovieIcon />}
+                >
                   IMDB
                 </Button>
-                <Button onClick={() => setOpen(true)} href="#" endIcon={<Theaters />}>
+                <Button
+                  onClick={() => setOpen(true)}
+                  href="#"
+                  endIcon={<Theaters />}
+                >
                   Trailer
                 </Button>
               </ButtonGroup>
             </Grid>
             <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
               <ButtonGroup variant="outlined" size="medium">
-                <Button onClick={addToFavorites} href="#" endIcon={!isMovieInFavorites ? <FavoriteBorderOutlined /> : <Favorite />}>
+                <Button
+                  onClick={addToFavorites}
+                  href="#"
+                  endIcon={
+                    !isMovieInFavorites ? (
+                      <FavoriteBorderOutlined />
+                    ) : (
+                      <Favorite />
+                    )
+                  }
+                >
                   {isMovieInFavorites ? "Unfavorite" : "Favorite"}
                 </Button>
-                <Button onClick={addToWatchlist} href="#" endIcon={isMovieInWatchlist ? <Remove /> : <PlusOne />}>
+                <Button
+                  onClick={addToWatchlist}
+                  href="#"
+                  endIcon={isMovieInWatchlist ? <Remove /> : <PlusOne />}
+                >
                   watchlist
                 </Button>
-                <Button sx={{ borderColor: "primary.main" }} endIcon={<ArrowBack />}>
-                  <Typography component={Link} to="/" color="inherit" variant="subtitle2" style={{ textDecoration: "none" }}>
+                <Button
+                  sx={{ borderColor: "primary.main" }}
+                  endIcon={<ArrowBack />}
+                  onClick={() => history.goBack()}
+                >
+                  <Typography
+                    component={Link}
+                    color="inherit"
+                    variant="subtitle2"
+                    style={{ textDecoration: "none" }}
+                  >
                     Back
                   </Typography>
                 </Button>
@@ -154,10 +275,27 @@ const MovieInformation = () => {
         <Typography variant="h5" gutterBottom align="center">
           You might also like
         </Typography>
-        {recommendations?.results?.length ? <MoviesList movies={recommendations} numberOfMovies={12} /> : <Box> No recommendations </Box>}
+        {recommendations?.results?.length ? (
+          <MoviesList movies={recommendations} numberOfMovies={12} />
+        ) : (
+          <Box> No recommendations </Box>
+        )}
       </Box>
-      <Modal closeAfterTransition className={classes.modal} open={open} onClose={() => setOpen(false)}>
-        {data.videos?.results?.length > 0 && <iframe autoPlay className={classes.video} style={{ border: 0 }} title="Trailer" src={`https://www.youtube.com/embed/${data.videos?.results[0]?.key}`} />}
+      <Modal
+        closeAfterTransition
+        className={classes.modal}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        {data.videos?.results?.length > 0 && (
+          <iframe
+            autoPlay
+            className={classes.video}
+            style={{ border: 0 }}
+            title="Trailer"
+            src={`https://www.youtube.com/embed/${data.videos?.results[0]?.key}`}
+          />
+        )}
       </Modal>
     </Grid>
   );

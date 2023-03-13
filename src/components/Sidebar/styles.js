@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
     textDecoration: "none",
   },
   genreImages: {
-    filter: theme.palette.mode === "dark" ? "dark" : "invert(0)",
+    filter: theme.palette.mode === "dark" && "invert(1)",
   },
   categoryText: {
     fontFamily: "epilogue, sans-serif",
