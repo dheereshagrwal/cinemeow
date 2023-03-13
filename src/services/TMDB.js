@@ -35,7 +35,7 @@ export const tmdbApi = createApi({
     }),
     getMovie: builder.query({
       query: (id) =>
-        `movie/${id}?api_key=${tmdbApiKey}&append_to_response=videos,images,credits`,
+        `movie/${id}?api_key=${tmdbApiKey}&append_to_response=videos,credits`,
     }),
 
     getList: builder.query({
