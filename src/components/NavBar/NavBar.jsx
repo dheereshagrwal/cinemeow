@@ -39,7 +39,6 @@ const NavBar = () => {
     sessionId: sessionIdFromLocalStorage,
   });
   const gravatarHash = userProfileDetails?.avatar?.gravatar?.hash;
-  console.log("gravatarHash", gravatarHash);
 
   useEffect(() => {
     const logInUser = async () => {
@@ -86,8 +85,13 @@ const NavBar = () => {
           {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
-              <Button color="inherit" onClick={fetchToken}>
-                Login &nbsp;
+              <Button
+                color="inherit"
+                onClick={fetchToken}
+                sx={{ textTransform: "none" }}
+                style={{ fontFamily: "epilogue, sans-serif" }}
+              >
+                Unlock purrks. Login! &nbsp;
                 <AccountCircle />
               </Button>
             ) : (

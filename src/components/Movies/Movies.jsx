@@ -29,7 +29,7 @@ const Movies = () => {
       </Box>
     );
   }
-  if (!data.results.length) {
+  if (!data?.results?.length) {
     return (
       <Box display="flex" alignItems="center" mt="20px">
         <Typography variant="h4">
@@ -41,6 +41,7 @@ const Movies = () => {
     );
   }
   if (error) {
+    console.log("error in Movies.jsx", error);
     return (
       <Box display="flex" alignItems="center" mt="20px">
         <Typography variant="h4">

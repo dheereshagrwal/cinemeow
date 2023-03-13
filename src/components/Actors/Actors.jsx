@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, CircularProgress, Typography } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
-import { useGetActorDetailsQuery, useGetMoviesByActorQuery } from "../../services/TMDB";
+import {
+  useGetActorDetailsQuery,
+  useGetMoviesByActorQuery,
+} from "../../services/TMDB";
 import useStyles from "./styles";
 import { MoviesList, Pagination } from "..";
 const Actors = () => {
@@ -22,7 +25,11 @@ const Actors = () => {
   if (error) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
-        <Button startIcon={<ArrowBack />} onClick={() => history.goBack()} color="primary">
+        <Button
+          startIcon={<ArrowBack />}
+          onClick={() => history.goBack()}
+          color="primary"
+        >
           Go Back
         </Button>
       </Box>
@@ -32,10 +39,23 @@ const Actors = () => {
     <>
       <Grid container spacing={3}>
         <Grid item lg={5} xl={4}>
-          <img className={classes.image} src={`https://image.tmdb.org/t/p/w780/${actor?.profile_path}`} alt={actor?.name} />
+          <img
+            className={classes.image}
+            src={`https://image.tmdb.org/t/p/w780/${actor?.profile_path}`}
+            alt={actor?.name}
+          />
         </Grid>
 
-        <Grid item lg={7} xl={8} style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+        <Grid
+          item
+          lg={7}
+          xl={8}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
           <Typography variant="h3" gutterBottom>
             {actor?.name}
           </Typography>
@@ -46,10 +66,19 @@ const Actors = () => {
             {actor?.biography || "No Biography Available"}
           </Typography>
           <Box marginTop="2rem" display="flex" justifyContent="space-around">
-            <Button variant="contained" color="primary" target="_blank" href={`https://www.imdb.com/name/${actor.imdb_id}`}>
+            <Button
+              variant="contained"
+              color="primary"
+              target="_blank"
+              href={`https://www.imdb.com/name/${actor.imdb_id}`}
+            >
               IMDB
             </Button>
-            <Button startIcon={<ArrowBack />} color="primary" onClick={() => history.goBack()}>
+            <Button
+              startIcon={<ArrowBack />}
+              color="primary"
+              onClick={() => history.goBack()}
+            >
               Back
             </Button>
           </Box>
@@ -60,7 +89,11 @@ const Actors = () => {
           Movies
         </Typography>
         {movies && <MoviesList movies={movies} numberOfMovies={12} />}
-        <Pagination currentPage={page} setPage={setPage} totalPages={movies?.total_pages} />
+        <Pagination
+          currentPage={page}
+          setPage={setPage}
+          totalPages={movies?.total_pages}
+        />
       </Box>
     </>
   );

@@ -55,8 +55,11 @@ const MovieInformation = () => {
     sessionId: localStorage.getItem("session_id"),
     page: 1,
   });
-  const { data: recommendations, isFetching: isRecommendationsFetching } =
-    useGetRecommendationsQuery({ movie_id: id, list: "/recommendations" });
+  const {
+    data: recommendations,
+    isFetching: isRecommendationsFetching,
+    error: isRecommendationsError,
+  } = useGetRecommendationsQuery({ movie_id: id, list: "/recommendations" });
 
   const [isMovieInFavorites, setIsMovieInFavorites] = useState(false);
   const [isMovieInWatchlist, setIsMovieInWatchlist] = useState(false);
@@ -92,7 +95,16 @@ const MovieInformation = () => {
     );
     setIsMovieInWatchlist((prev) => !prev);
   };
-
+  console.log(
+    "isFetching: ",
+    isFetching,
+    "isRecommendationsFetching: ",
+    isRecommendationsFetching,
+    "isRecommendationsError: ",
+    isRecommendationsError,
+    "error: ",
+    error
+  );
   if (isFetching) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
@@ -100,7 +112,7 @@ const MovieInformation = () => {
       </Box>
     );
   }
-  if (error) {
+  if (error || isRecommendationsError) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
         <Link to="/"> Something has gone wrong - go back </Link>
@@ -118,10 +130,20 @@ const MovieInformation = () => {
         />
       </Grid>
       <Grid item container direction="column" lg={7}>
-        <Typography variant="h3" align="center" gutterBottom>
+        <Typography
+          variant="h3"
+          align="center"
+          gutterBottom
+          style={{ fontFamily: "epilogue, sans-serif" }}
+        >
           {data?.title} ({data?.release_date?.split("-")[0]})
         </Typography>
-        <Typography variant="h5" align="center" gutterBottom>
+        <Typography
+          variant="h5"
+          align="center"
+          gutterBottom
+          style={{ fontFamily: "Montserrat, sans-serif" }}
+        >
           {data?.tagline}
         </Typography>
         <Grid item className={classes.containerSpaceAround}>
@@ -131,12 +153,20 @@ const MovieInformation = () => {
               variant="subtitle1"
               align="center"
               gutterBottom
-              style={{ marginLeft: "10px" }}
+              style={{
+                marginLeft: "10px",
+                fontFamily: "Montserrat, sans-serif",
+              }}
             >
               {data?.vote_average} / 10
             </Typography>
           </Box>
-          <Typography variant="h6" align="center" gutterBottom>
+          <Typography
+            variant="h6"
+            align="center"
+            gutterBottom
+            style={{ fontFamily: "Montserrat, sans-serif" }}
+          >
             {data?.runtime} min |{" "}
             {data?.spoken_languages
               ?.map((language) => language.name)
@@ -146,9 +176,9 @@ const MovieInformation = () => {
         <Grid item className={classes.genresContainer}>
           {data?.genres?.map((genre) => (
             <Link
+              to="/"
               key={genre?.name}
               className={classes.links}
-              to="/"
               onClick={() => dispatch(selectGenreOrCategory(genre.id))}
             >
               <img
@@ -157,24 +187,41 @@ const MovieInformation = () => {
                 height={30}
                 alt="genreIcon"
               />
-              <Typography color="textPrimary" variant="subtitle1">
+              <Typography
+                color="textPrimary"
+                variant="subtitle1"
+                style={{ fontFamily: "Montserrat, sans-serif" }}
+              >
                 {genre?.name}
               </Typography>
             </Link>
           ))}
         </Grid>
-        <Typography variant="h5" gutterBottom style={{ marginTop: "10px" }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          style={{ marginTop: "10px", fontFamily: "epilogue, sans-serif" }}
+        >
           Overview
         </Typography>
-        <Typography style={{ marginBottom: "2rem" }} gutterBottom>
+        <Typography
+          style={{ marginBottom: "2rem", fontFamily: "Montserrat, sans-serif" }}
+          gutterBottom
+        >
           {data?.overview}
         </Typography>
-        <Typography variant="h5" gutterBottom>
-          Top Cast
+        <Typography
+          variant="h5"
+          gutterBottom
+          style={{
+            fontFamily: "epilogue, sans-serif",
+          }}
+        >
+          Purr-fect Performers
         </Typography>
         <Grid item container spacing={2}>
           {data &&
-            data.credits?.cast?.slice(0, 6).map(
+            data?.credits?.cast?.slice(0, 6).map(
               (character, i) =>
                 character.profile_path && (
                   <Grid
@@ -210,6 +257,7 @@ const MovieInformation = () => {
                   rel="noopener noreferrer"
                   href={data?.homepage}
                   endIcon={<Language />}
+                  style={{ fontFamily: "sora, sans-serif" }}
                 >
                   Website
                 </Button>
@@ -218,6 +266,7 @@ const MovieInformation = () => {
                   rel="noopener noreferrer"
                   href={`https://www.imdb.com/title/${data?.imdb_id}`}
                   endIcon={<MovieIcon />}
+                  style={{ fontFamily: "sora, sans-serif" }}
                 >
                   IMDB
                 </Button>
@@ -225,13 +274,18 @@ const MovieInformation = () => {
                   onClick={() => setOpen(true)}
                   href="#"
                   endIcon={<Theaters />}
+                  style={{ fontFamily: "sora, sans-serif" }}
                 >
                   Trailer
                 </Button>
               </ButtonGroup>
             </Grid>
             <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
-              <ButtonGroup variant="outlined" size="medium">
+              <ButtonGroup
+                variant="outlined"
+                size="medium"
+                style={{ fontFamily: "sora, sans-serif" }}
+              >
                 <Button
                   onClick={addToFavorites}
                   href="#"
@@ -242,6 +296,7 @@ const MovieInformation = () => {
                       <Favorite />
                     )
                   }
+                  style={{ fontFamily: "sora, sans-serif" }}
                 >
                   {isMovieInFavorites ? "Unfavorite" : "Favorite"}
                 </Button>
@@ -249,6 +304,7 @@ const MovieInformation = () => {
                   onClick={addToWatchlist}
                   href="#"
                   endIcon={isMovieInWatchlist ? <Remove /> : <PlusOne />}
+                  style={{ fontFamily: "sora, sans-serif" }}
                 >
                   watchlist
                 </Button>
@@ -256,9 +312,9 @@ const MovieInformation = () => {
                   sx={{ borderColor: "primary.main" }}
                   endIcon={<ArrowBack />}
                   onClick={() => history.goBack()}
+                  style={{ fontFamily: "sora, sans-serif" }}
                 >
                   <Typography
-                    component={Link}
                     color="inherit"
                     variant="subtitle2"
                     style={{ textDecoration: "none" }}
@@ -272,9 +328,17 @@ const MovieInformation = () => {
         </Grid>
       </Grid>
       <Box marginTop="5rem" width="100%">
-        <Typography variant="h5" gutterBottom align="center">
-          You might also like
+        <Typography
+          variant="h5"
+          gutterBottom
+          align="center"
+          style={{
+            fontFamily: "epilogue, sans-serif",
+          }}
+        >
+          Paw-sibly of interest to you
         </Typography>
+        <br />
         {recommendations?.results?.length ? (
           <MoviesList movies={recommendations} numberOfMovies={12} />
         ) : (
@@ -287,7 +351,7 @@ const MovieInformation = () => {
         open={open}
         onClose={() => setOpen(false)}
       >
-        {data.videos?.results?.length > 0 && (
+        {data?.videos?.results?.length > 0 && (
           <iframe
             autoPlay
             className={classes.video}

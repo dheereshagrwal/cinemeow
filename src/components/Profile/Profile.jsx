@@ -34,20 +34,40 @@ const Profile = () => {
   return (
     <Box>
       <Box display="flex" justifyContent="space-between">
-        <Typography variant="h5" gutterBottom>
-          My Profile
+        <Typography
+          gutterBottom
+          style={{
+            fontFamily: "sora, sans-serif",
+            fontSize: "1.2rem",
+          }}
+        >
+          Meowdy! {user?.username}
         </Typography>
-        <Button color="inherit" onClick={logout}>
-          Logout &nbsp;
+        <Button
+          color="inherit"
+          onClick={logout}
+          sx={{ textTransform: "none" }}
+          style={{
+            fontFamily: "epilogue, sans-serif",
+          }}
+        >
+          Bye for meow &nbsp;
           <ExitToApp />
         </Button>
       </Box>
-      {!favoriteMovies?.results?.length && watchlistMovies?.results?.length ? (
-        <Typography variant="body1">Add favorites to see them here!</Typography>
+      {!favoriteMovies?.results?.length && !watchlistMovies?.results?.length ? (
+        <Typography
+          variant="body1"
+          style={{
+            fontFamily: "epilogue, sans-serif",
+          }}
+        >
+          Add favorites to see them here!
+        </Typography>
       ) : (
         <Box>
-          <RatedCards title="Favorite Movies" data={favoriteMovies} />
-          <RatedCards title="Watchlist Movies" data={watchlistMovies} />
+          <RatedCards title="Favorite Meowies" data={favoriteMovies} />
+          <RatedCards title="Watchlist Meowies" data={watchlistMovies} />
         </Box>
       )}
     </Box>

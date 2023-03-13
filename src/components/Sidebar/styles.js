@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
     padding: "10% 0",
   },
   image: {
-    width: "70%",
+    width: "90%",
   },
   links: {
     color: theme.palette.text.primary,
@@ -20,7 +20,6 @@ export default makeStyles((theme) => ({
     fontSize: "0.9rem",
   },
   genreText: {
-    // fontFamily: "Meows, sans-serif",
     fontFamily: "epilogue, sans-serif",
     fontSize: "0.9rem",
   },

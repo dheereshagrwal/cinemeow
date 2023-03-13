@@ -6,7 +6,11 @@ const RatedCards = ({ title, data }) => {
   const classes = useStyles();
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
+      <Typography
+        variant="h6"
+        gutterBottom
+        style={{ fontFamily: "epilogue, sans-serif" }}
+      >
         {title}
       </Typography>
       <Box display="flex" flexWrap="wrap" className={classes.container}>

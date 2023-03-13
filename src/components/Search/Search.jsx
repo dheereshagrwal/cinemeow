@@ -4,7 +4,10 @@ import { Search as SearchIcon } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useLocation } from "react-router-dom";
 import useStyles from "./styles";
-import { clearSelectedGenreOrCategory, searchMovie } from "../../features/currentGenreOrCategory";
+import {
+  clearSelectedGenreOrCategory,
+  searchMovie,
+} from "../../features/currentGenreOrCategory";
 const Search = () => {
   const classes = useStyles();
   const [query, setQuery] = useState("");

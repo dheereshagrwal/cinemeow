@@ -19,7 +19,6 @@ export default makeStyles((theme) => ({
     borderRadius: "20px",
     height: "300px",
     marginBottom: "10px",
-    width : "auto",
     "&:hover": {
       transform: "scale(1.05)",
     },
