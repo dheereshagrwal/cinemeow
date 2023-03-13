@@ -64,10 +64,6 @@ const MovieInformation = () => {
         item
         xs={12}
         lg={4}
-        style={{
-          display: "flex",
-          marginBottom: "30px",
-        }}
       >
         <img className={classes.poster} src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`} alt={data?.title} />
       </Grid>
