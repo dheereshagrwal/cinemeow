@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearSelectedGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { useTheme } from "@mui/material/styles";
-
+import lightNoPoster from "../../assets/images/light-no-poster.png";
+import darkNoPoster from "../../assets/images/dark-no-poster.png";
 const Movie = ({ movie, i }) => {
   const theme = useTheme();
-  const lightPlaceholderUrl = `https://iili.io/HXXbaOF.png`;
-  const darkPlaceholderUrl = `https://iili.io/HXXbWUN.png`;
   const dispatch = useDispatch();
   const classes = useStyles();
   const handleLinkClick = () => {
@@ -30,8 +29,8 @@ const Movie = ({ movie, i }) => {
               movie.poster_path
                 ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
                 : theme.palette.mode === "dark"
-                ? darkPlaceholderUrl
-                : lightPlaceholderUrl
+                ? darkNoPoster
+                : lightNoPoster
             }
           />
         </Link>

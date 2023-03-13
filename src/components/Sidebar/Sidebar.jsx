@@ -17,9 +17,9 @@ import { useGetGenresQuery } from "../../services/TMDB";
 import { useDispatch, useSelector } from "react-redux";
 import genreIcons from "../../assets/genres";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+import lightLogo from "../../assets/images/light-logo.png";
+import darkLogo from "../../assets/images/dark-logo.png";
 
-const lightLogo = "https://iili.io/HXXDPoJ.png";
-const darkLogo = "https://iili.io/HXXDgAF.png";
 const categories = [
   { label: "Popular", value: "popular" },
   { label: "Top Rated", value: "top_rated" },
