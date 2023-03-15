@@ -350,7 +350,7 @@ const MovieInformation = () => {
               alignItems: "center",
             }}
           >
-            <img src={frown} alt="no recommendations" width="500px" />
+            <img src={frown} alt="no recommendations" width="300px" />
           </Box>
         )}
       </Box>
