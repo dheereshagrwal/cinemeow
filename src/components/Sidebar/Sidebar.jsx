@@ -16,8 +16,7 @@ import { useGetGenresQuery } from "../../services/TMDB";
 import { useDispatch, useSelector } from "react-redux";
 import genreIcons from "../../assets/genres";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
-import lightLogo from "../../assets/images/light-logo.png";
-import darkLogo from "../../assets/images/dark-logo.png";
+import logo from "../../assets/images/logo.png";
 
 const categories = [
   { label: "Popular", value: "popular" },
@@ -56,7 +55,7 @@ const Sidebar = ({ setMobileOpen }) => {
       >
         <img
           className={classes.image}
-          src={theme.palette.mode === "light" ? lightLogo : darkLogo}
+          src={logo}
           alt="cinemeow logo"
         />
       </Link>
