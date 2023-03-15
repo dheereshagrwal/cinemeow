@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   CircularProgress,
@@ -21,7 +21,7 @@ const Movies = () => {
     searchQuery,
   });
   const lg = useMediaQuery((theme) => theme.breakpoints.only("lg"));
-  const numberOfMovies = lg ? 16 : 18;
+  const numberOfMovies = lg ? 17 : 19;
   if (isFetching) {
     return (
       <Box display="flex" justifyContent="center">
@@ -69,7 +69,7 @@ const Movies = () => {
   return (
     <div>
       <FeaturedMovie movie={data.results[0]} />
-      <MoviesList movies={data} numberOfMovies={numberOfMovies} />
+      <MoviesList movies={data} numberOfMovies={numberOfMovies} excludeFirst />
       <Pagination
         currentPage={page}
         setPage={setPage}

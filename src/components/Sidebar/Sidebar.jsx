@@ -26,7 +26,7 @@ const categories = [
   { label: "Upcoming", value: "upcoming" },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ setMobileOpen }) => {
   const [selectedGenreOrCategory, setSelectedGenreOrCategory] = useState();
   const theme = useTheme();
   const classes = useStyles();
@@ -41,9 +41,20 @@ const Sidebar = () => {
     dispatch(selectGenreOrCategory(value));
   };
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
+
   return (
     <>
-      <Link to="/" className={classes.imageLink}>
+      <Link
+        to="/"
+        className={classes.imageLink}
+        onClick={(event) => {
+          event.preventDefault();
+          window.location.href = "/";
+        }}
+      >
         <img
           className={classes.image}
           src={theme.palette.mode === "light" ? lightLogo : darkLogo}
