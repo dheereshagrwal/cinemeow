@@ -7,8 +7,8 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../services/TMDB";
-import { MoviesList, Pagination } from "..";
-import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+import { MoviesList, Pagination, FeaturedMovie } from "..";
+import frown from "../../assets/images/frown.png";
 
 const Movies = () => {
   const [page, setPage] = useState(1);
@@ -31,12 +31,25 @@ const Movies = () => {
   }
   if (!data?.results?.length) {
     return (
-      <Box display="flex" alignItems="center" mt="20px">
-        <Typography variant="h4">
-          No movies found
-          <br />
-          Please search for another movie
+      <Box>
+        <Typography
+          style={{
+            fontFamily: "epilogue, sans-serif",
+            fontSize: "1.5rem",
+          }}
+          align="center"
+        >
+          no meowies found
         </Typography>
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img src={frown} alt="no recommendations" width="500px" />
+        </Box>
       </Box>
     );
   }
@@ -52,8 +65,10 @@ const Movies = () => {
       </Box>
     );
   }
+
   return (
     <div>
+      <FeaturedMovie movie={data.results[0]} />
       <MoviesList movies={data} numberOfMovies={numberOfMovies} />
       <Pagination
         currentPage={page}

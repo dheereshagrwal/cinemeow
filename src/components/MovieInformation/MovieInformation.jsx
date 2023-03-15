@@ -96,16 +96,7 @@ const MovieInformation = () => {
     );
     setIsMovieInWatchlist((prev) => !prev);
   };
-  console.log(
-    "isFetching: ",
-    isFetching,
-    "isRecommendationsFetching: ",
-    isRecommendationsFetching,
-    "isRecommendationsError: ",
-    isRecommendationsError,
-    "error: ",
-    error
-  );
+
   if (isFetching) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
@@ -354,7 +345,7 @@ const MovieInformation = () => {
               alignItems: "center",
             }}
           >
-            <img src={frown} alt="no recommendations" width="20%" />
+            <img src={frown} alt="no recommendations" width="500px" />
           </Box>
         )}
       </Box>
