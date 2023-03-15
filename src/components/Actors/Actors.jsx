@@ -56,13 +56,28 @@ const Actors = () => {
             flexDirection: "column",
           }}
         >
-          <Typography variant="h3" gutterBottom>
+          <Typography
+            variant="h3"
+            gutterBottom
+            style={{ fontFamily: "sora, sans-serif" }}
+          >
             {actor?.name}
           </Typography>
-          <Typography variant="h5" gutterBottom>
+          <Typography
+            variant="h5"
+            gutterBottom
+            style={{ fontFamily: "Montserrat, sans-serif" }}
+          >
             Born : {new Date(actor?.birthday).toDateString()}
           </Typography>
-          <Typography variant="body1" paragraph align="justify">
+          <Typography
+            variant="body1"
+            paragraph
+            align="justify"
+            style={{
+              fontFamily: "epilogue, sans-serif",
+            }}
+          >
             {actor?.biography || "No Biography Available"}
           </Typography>
           <Box marginTop="2rem" display="flex" justifyContent="space-around">
@@ -71,6 +86,7 @@ const Actors = () => {
               color="primary"
               target="_blank"
               href={`https://www.imdb.com/name/${actor.imdb_id}`}
+              style={{ fontFamily: "sora, sans-serif" }}
             >
               IMDB
             </Button>
@@ -78,6 +94,7 @@ const Actors = () => {
               startIcon={<ArrowBack />}
               color="primary"
               onClick={() => history.goBack()}
+              style={{ fontFamily: "sora, sans-serif" }}
             >
               Back
             </Button>
