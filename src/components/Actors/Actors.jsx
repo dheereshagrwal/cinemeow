@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, CircularProgress, Typography } from "@mui/material";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import {
   useGetActorDetailsQuery,

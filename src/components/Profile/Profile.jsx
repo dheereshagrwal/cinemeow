@@ -83,7 +83,6 @@ const Profile = () => {
       ) : (
         <Box>
           <RatedCards title="Favorite Meowies" data={favoriteMovies} />
-          <br />
           <RatedCards title="Watchlist Meowies" data={watchlistMovies} />
         </Box>
       )}

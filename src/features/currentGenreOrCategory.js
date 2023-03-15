@@ -20,5 +20,9 @@ export const genreOrCategory = createSlice({
     },
   },
 });
-export const { selectGenreOrCategory, searchMovie, clearSelectedGenreOrCategory  } = genreOrCategory.actions;
+export const {
+  selectGenreOrCategory,
+  searchMovie,
+  clearSelectedGenreOrCategory,
+} = genreOrCategory.actions;
 export default genreOrCategory.reducer;

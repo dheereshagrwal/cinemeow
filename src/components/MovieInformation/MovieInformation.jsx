@@ -7,9 +7,7 @@ import {
   Grid,
   Box,
   CircularProgress,
-  useMediaQuery,
   Rating,
-  collapseClasses,
 } from "@mui/material";
 import {
   Movie as MovieIcon,

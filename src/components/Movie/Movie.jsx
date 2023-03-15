@@ -2,7 +2,7 @@ import React from "react";
 import useStyles from "./styles";
 import { Typography, Grid, Grow, Tooltip, Rating } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearSelectedGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { useTheme } from "@mui/material/styles";
 import lightNoPoster from "../../assets/images/light-no-poster.png";
