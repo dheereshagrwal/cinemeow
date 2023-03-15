@@ -55,6 +55,7 @@ export default makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
+      margin: "0 auto",
     },
   },
   modal: {

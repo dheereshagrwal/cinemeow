@@ -230,10 +230,16 @@ const MovieInformation = () => {
                       alt={character?.name}
                       className={classes.castImage}
                     />
-                    <Typography color="textPrimary">
+                    <Typography
+                      color="textPrimary"
+                      style={{ fontFamily: "Montserrat, sans-serif" }}
+                    >
                       {character?.name}
                     </Typography>
-                    <Typography color="textSecondary">
+                    <Typography
+                      color="textSecondary"
+                      style={{ fontFamily: "Montserrat, sans-serif" }}
+                    >
                       {character?.character}
                     </Typography>
                   </Grid>
@@ -272,6 +278,7 @@ const MovieInformation = () => {
                 </Button>
               </ButtonGroup>
             </Grid>
+            <br />
             <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
               <ButtonGroup
                 variant="outlined"

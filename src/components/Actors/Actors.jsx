@@ -102,8 +102,15 @@ const Actors = () => {
         </Grid>
       </Grid>
       <Box margin="2rem 0">
-        <Typography variant="h2" gutterBottom align="center">
-          Movies
+        <Typography
+          variant="h2"
+          gutterBottom
+          align="center"
+          style={{
+            fontFamily: "epilogue, sans-serif",
+          }}
+        >
+          Meowies
         </Typography>
         {movies && <MoviesList movies={movies} numberOfMovies={12} />}
         <Pagination

@@ -30,7 +30,6 @@ export default makeStyles((theme) => ({
     overflow: "hidden",
     marginTop: "10px",
     marginBottom: 0,
-    fontFamily: "sora, sans-serif",
     textAlign: "center",
   },
   rating: {

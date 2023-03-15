@@ -35,7 +35,12 @@ const Movie = ({ movie, i }) => {
           />
         </Link>
       </Grow>
-      <Typography className={classes.title}>{movie.title}</Typography>
+      <Typography
+        className={classes.title}
+        style={{ fontFamily: "Montserrat, sans-serif" }}
+      >
+        {movie.title}
+      </Typography>
       <Tooltip disableTouchListener title={`${movie.vote_average}/10`}>
         <div className={classes.rating}>
           <Rating
