@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, CircularProgress, Typography } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import {
   useGetActorDetailsQuery,
@@ -11,7 +11,7 @@ import { MoviesList, Pagination } from "..";
 const Actors = () => {
   const { id } = useParams();
   const [page, setPage] = useState(1);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { data: actor, isFetching, error } = useGetActorDetailsQuery(id);
   const { data: movies } = useGetMoviesByActorQuery({ id, page });
   const classes = useStyles();
@@ -27,7 +27,7 @@ const Actors = () => {
       <Box display="flex" justifyContent="center" alignItems="center">
         <Button
           startIcon={<ArrowBack />}
-          onClick={() => history.goBack()}
+          onClick={() => navigate(-1)}
           color="primary"
         >
           Go Back
@@ -93,7 +93,7 @@ const Actors = () => {
             <Button
               startIcon={<ArrowBack />}
               color="primary"
-              onClick={() => history.goBack()}
+              onClick={() => navigate(-1)}
               style={{ fontFamily: "sora, sans-serif" }}
             >
               Back

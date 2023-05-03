@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { InputAdornment, TextField } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useStyles from "./styles";
 import {
   clearSelectedGenreOrCategory,
@@ -12,12 +12,12 @@ const Search = () => {
   const classes = useStyles();
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       dispatch(searchMovie(query));
       dispatch(clearSelectedGenreOrCategory());
-      history.push("/");
+      navigate.push("/");
     }
   };
   return (

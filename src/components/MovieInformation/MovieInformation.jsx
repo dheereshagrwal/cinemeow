@@ -19,7 +19,7 @@ import {
   Remove,
   ArrowBack,
 } from "@mui/icons-material";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   useGetMovieQuery,
@@ -34,7 +34,7 @@ import { MoviesList } from "..";
 import { userSelector } from "../../features/auth";
 import frown from "../../assets/images/frown.png";
 const MovieInformation = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { user } = useSelector(userSelector);
   const { id } = useParams();
   const classes = useStyles();
@@ -310,7 +310,7 @@ const MovieInformation = () => {
                 <Button
                   sx={{ borderColor: "primary.main" }}
                   endIcon={<ArrowBack />}
-                  onClick={() => history.goBack()}
+                  onClick={() => navigate(-1)}
                   style={{ fontFamily: "sora, sans-serif" }}
                 >
                   <Typography
