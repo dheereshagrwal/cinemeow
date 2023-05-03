@@ -256,9 +256,12 @@ const MovieInformation = () => {
                   rel="noopener noreferrer"
                   href={data?.homepage}
                   endIcon={<Language />}
-                  style={{ fontFamily: "sora, sans-serif" }}
+                  style={{
+                    fontFamily: "sora, sans-serif",
+                    textTransform: "none",
+                  }}
                 >
-                  Website
+                  website
                 </Button>
                 <Button
                   target="_blank"
@@ -274,11 +277,13 @@ const MovieInformation = () => {
                 </Button>
                 <Button
                   onClick={() => setOpen(true)}
-                  href="#"
                   endIcon={<Theaters />}
-                  style={{ fontFamily: "sora, sans-serif" }}
+                  style={{
+                    fontFamily: "sora, sans-serif",
+                    textTransform: "none",
+                  }}
                 >
-                  Trailer
+                  trailer
                 </Button>
               </ButtonGroup>
             </Grid>
@@ -299,15 +304,21 @@ const MovieInformation = () => {
                       <Favorite />
                     )
                   }
-                  style={{ fontFamily: "sora, sans-serif" }}
+                  style={{
+                    fontFamily: "sora, sans-serif",
+                    textTransform: "none",
+                  }}
                 >
-                  {isMovieInFavorites ? "Unfavorite" : "Favorite"}
+                  {isMovieInFavorites ? "unfavorite" : "favorite"}
                 </Button>
                 <Button
                   onClick={addToWatchlist}
                   href="#"
                   endIcon={isMovieInWatchlist ? "-" : "+"}
-                  style={{ fontFamily: "sora, sans-serif" }}
+                  style={{
+                    fontFamily: "sora, sans-serif",
+                    textTransform: "none",
+                  }}
                 >
                   watchlist
                 </Button>
@@ -315,15 +326,12 @@ const MovieInformation = () => {
                   sx={{ borderColor: "primary.main" }}
                   endIcon={<ArrowBack />}
                   onClick={() => navigate(-1)}
-                  style={{ fontFamily: "sora, sans-serif" }}
+                  style={{
+                    fontFamily: "sora, sans-serif",
+                    textTransform: "none",
+                  }}
                 >
-                  <Typography
-                    color="inherit"
-                    variant="subtitle2"
-                    style={{ textDecoration: "none" }}
-                  >
-                    Back
-                  </Typography>
+                  back
                 </Button>
               </ButtonGroup>
             </Grid>

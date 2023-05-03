@@ -25,9 +25,9 @@ const Pagination = ({ currentPage, setPage, totalPages }) => {
         type="button"
         disabled={currentPage === 1}
         size="small"
-        style={{ fontFamily: "sora, sans-serif" }}
+        style={{ fontFamily: "sora, sans-serif", textTransform: "none" }}
       >
-        Prev
+        prev
       </Button>
       <Typography variant="h5" className={classes.pageNumber}>
         {currentPage}
@@ -40,9 +40,9 @@ const Pagination = ({ currentPage, setPage, totalPages }) => {
         type="button"
         disabled={currentPage === totalPages}
         size="small"
-        style={{ fontFamily: "sora, sans-serif" }}
+        style={{ fontFamily: "sora, sans-serif", textTransform: "none" }}
       >
-        Next
+        next
       </Button>
     </div>
   );
