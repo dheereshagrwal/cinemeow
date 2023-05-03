@@ -13,10 +13,8 @@ import {
   Movie as MovieIcon,
   Theaters,
   Language,
-  PlusOne,
   Favorite,
   FavoriteBorderOutlined,
-  Remove,
   ArrowBack,
 } from "@mui/icons-material";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -33,6 +31,7 @@ import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { MoviesList } from "..";
 import { userSelector } from "../../features/auth";
 import frown from "../../assets/images/frown.png";
+import { motion } from "framer-motion";
 const MovieInformation = () => {
   const navigate = useNavigate();
   const { user } = useSelector(userSelector);
@@ -225,10 +224,12 @@ const MovieInformation = () => {
                     to={`/actors/${character.id}`}
                     style={{ textDecoration: "none" }}
                   >
-                    <img
+                    <motion.img
                       src={`https://image.tmdb.org/t/p/w500${character?.profile_path}`}
                       alt={character?.name}
                       className={classes.castImage}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.5, type: "tween" }}
                     />
                     <Typography
                       color="textPrimary"
@@ -264,9 +265,12 @@ const MovieInformation = () => {
                   rel="noopener noreferrer"
                   href={`https://www.imdb.com/title/${data?.imdb_id}`}
                   endIcon={<MovieIcon />}
-                  style={{ fontFamily: "sora, sans-serif" }}
+                  style={{
+                    fontFamily: "sora, sans-serif",
+                    textTransform: "none",
+                  }}
                 >
-                  IMDB
+                  IMDb
                 </Button>
                 <Button
                   onClick={() => setOpen(true)}
@@ -302,7 +306,7 @@ const MovieInformation = () => {
                 <Button
                   onClick={addToWatchlist}
                   href="#"
-                  endIcon={isMovieInWatchlist ? <Remove /> : <PlusOne />}
+                  endIcon={isMovieInWatchlist ? "-" : "+"}
                   style={{ fontFamily: "sora, sans-serif" }}
                 >
                   watchlist

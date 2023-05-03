@@ -86,9 +86,9 @@ const Actors = () => {
               color="primary"
               target="_blank"
               href={`https://www.imdb.com/name/${actor.imdb_id}`}
-              style={{ fontFamily: "sora, sans-serif" }}
+              style={{ fontFamily: "sora, sans-serif", textTransform: "none" }}
             >
-              IMDB
+              IMDb
             </Button>
             <Button
               startIcon={<ArrowBack />}
