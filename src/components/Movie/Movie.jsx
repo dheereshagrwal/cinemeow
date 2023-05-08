@@ -7,7 +7,6 @@ import { clearSelectedGenreOrCategory } from "../../features/currentGenreOrCateg
 import { useTheme } from "@mui/material/styles";
 import lightNoPoster from "../../assets/images/light-no-poster.png";
 import darkNoPoster from "../../assets/images/dark-no-poster.png";
-import { motion } from "framer-motion";
 const Movie = ({ movie, i }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -23,9 +22,9 @@ const Movie = ({ movie, i }) => {
           to={`/movies/${movie.id}`}
           onClick={handleLinkClick}
         >
-          <motion.img
+          <img
             alt={movie.title}
-            className={classes.image}
+            className={`hvr-shrink ${classes.image}`}
             src={
               movie.poster_path
                 ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -33,8 +32,6 @@ const Movie = ({ movie, i }) => {
                 ? darkNoPoster
                 : lightNoPoster
             }
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.5, type: "tween" }}
           />
         </Link>
       </Grow>

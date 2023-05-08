@@ -31,7 +31,6 @@ import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { MoviesList } from "..";
 import { userSelector } from "../../features/auth";
 import frown from "../../assets/images/frown.png";
-import { motion } from "framer-motion";
 const MovieInformation = () => {
   const navigate = useNavigate();
   const { user } = useSelector(userSelector);
@@ -224,12 +223,10 @@ const MovieInformation = () => {
                     to={`/actors/${character.id}`}
                     style={{ textDecoration: "none" }}
                   >
-                    <motion.img
+                    <img
                       src={`https://image.tmdb.org/t/p/w500${character?.profile_path}`}
                       alt={character?.name}
-                      className={classes.castImage}
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.5, type: "tween" }}
+                      className={`hvr-shrink ${classes.castImage}`}
                     />
                     <Typography
                       color="textPrimary"
