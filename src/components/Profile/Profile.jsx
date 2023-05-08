@@ -63,9 +63,9 @@ const Profile = () => {
       {!favoriteMovies?.results?.length && !watchlistMovies?.results?.length ? (
         <Box>
           <Typography
-            variant="body1"
             style={{
               fontFamily: "epilogue, sans-serif",
+              fontSize: "1.4rem",
             }}
             align="center"
           >

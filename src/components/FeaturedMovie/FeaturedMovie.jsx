@@ -9,7 +9,7 @@ const FeaturedMovie = ({ movie }) => {
     <Box
       component={Link}
       to={`/movies/${movie?.id}`}
-      className={classes.featuredCardContainer}
+      className={`hvr-glow ${classes.featuredCardContainer}`}
     >
       <Card className={classes.card} classes={{ root: classes.cardRoot }}>
         <CardMedia
