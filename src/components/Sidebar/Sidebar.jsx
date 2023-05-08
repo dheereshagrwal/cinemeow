@@ -54,7 +54,7 @@ const Sidebar = ({ setMobileOpen }) => {
         }}
       >
         <img
-          className={classes.image}
+          className={`hvr-forward ${classes.image}`}
           src={logo}
           alt="cinemeow logo"
         />
@@ -101,7 +101,7 @@ const Sidebar = ({ setMobileOpen }) => {
           </Box>
         ) : (
           data.genres.map(({ name, id }) => (
-            <Link key={name} className={classes.links} to="/">
+            <Link key={name} className={`${classes.links}`} to="/">
               <ListItemButton
                 selected={genreIdOrCategoryName === id}
                 onClick={() => handleGenreOrCategoryClick(id)}

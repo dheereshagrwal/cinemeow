@@ -6,8 +6,9 @@ import { ExitToApp } from "@mui/icons-material";
 import { useGetListQuery } from "../../services/TMDB";
 import { RatedCards } from "..";
 import catHeartbreak from "../../assets/images/cat-heartbreak.png";
-
+import useStyles from "./styles";
 const Profile = () => {
+  const classes = useStyles();
   const { user } = useSelector(userSelector);
   const { data: favoriteMovies, refetch: refetchFavoriteMovies } =
     useGetListQuery({
@@ -77,7 +78,11 @@ const Profile = () => {
               alignItems: "center",
             }}
           >
-            <img src={catHeartbreak} alt="no recommendations" width="20%" />
+            <img
+              src={catHeartbreak}
+              alt="no favorites and watchlist"
+              className={`animate__animated animate__rollIn ${classes.heartBreakImage}`}
+            />
           </Box>
         </Box>
       ) : (

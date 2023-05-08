@@ -79,11 +79,12 @@ const NavBar = () => {
             color="inherit"
             sx={{ ml: 1 }}
             onClick={colorMode.toggleColorMode}
+            className="hvr-box-shadow-outset"
           >
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
           {!isMobile && <Search />}
-          <div>
+          <div className="hvr-grow">
             {!isAuthenticated ? (
               <Button
                 color="inherit"

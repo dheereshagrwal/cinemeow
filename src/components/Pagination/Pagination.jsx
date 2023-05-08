@@ -36,7 +36,7 @@ const Pagination = ({ currentPage, setPage, totalPages }) => {
         variant="contained"
         onClick={handleNext}
         color="primary"
-        className={classes.button}
+        className={`${classes.button}`}
         type="button"
         disabled={currentPage === totalPages}
         size="small"

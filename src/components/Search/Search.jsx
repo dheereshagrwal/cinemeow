@@ -17,7 +17,7 @@ const Search = () => {
     if (event.key === "Enter") {
       dispatch(searchMovie(query));
       dispatch(clearSelectedGenreOrCategory());
-      navigate.push("/");
+      navigate("/");
     }
   };
   return (

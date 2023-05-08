@@ -112,7 +112,7 @@ const MovieInformation = () => {
     <Grid container className={classes.containerSpaceAround}>
       <Grid item xs={12} lg={4}>
         <img
-          className={classes.poster}
+          className={`hvr-shadow ${classes.poster}`}
           src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`}
           alt={data?.title}
         />
@@ -293,7 +293,6 @@ const MovieInformation = () => {
               >
                 <Button
                   onClick={addToFavorites}
-                  href="#"
                   endIcon={
                     !isMovieInFavorites ? (
                       <FavoriteBorderOutlined />
@@ -310,7 +309,6 @@ const MovieInformation = () => {
                 </Button>
                 <Button
                   onClick={addToWatchlist}
-                  href="#"
                   endIcon={isMovieInWatchlist ? "-" : "+"}
                   style={{
                     fontFamily: "sora, sans-serif",
