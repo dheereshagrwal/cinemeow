@@ -12,17 +12,22 @@ const Actors = () => {
   const { id } = useParams();
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
-  const { data: actor, isFetching, error } = useGetActorDetailsQuery(id);
-  const { data: movies } = useGetMoviesByActorQuery({ id, page });
+  const {
+    data: actor,
+    isFetching: isActorFetching,
+    error: actorError,
+  } = useGetActorDetailsQuery(id);
+  const { data: movies, isFetching: isMoviesFetching,error: moviesError } =
+    useGetMoviesByActorQuery({ id, page });
   const classes = useStyles();
-  if (isFetching) {
+  if (isActorFetching || isMoviesFetching) {
     return (
       <Box display="flex" justifyContent="center">
         <CircularProgress size="8rem" />
       </Box>
     );
   }
-  if (error) {
+  if (actorError || moviesError) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
         <Button
@@ -40,7 +45,7 @@ const Actors = () => {
       <Grid container spacing={3}>
         <Grid item lg={5} xl={4}>
           <img
-            className={classes.image}
+            className={`hvr-shadow ${classes.image}`}
             src={`https://image.tmdb.org/t/p/w780/${actor?.profile_path}`}
             alt={actor?.name}
           />
