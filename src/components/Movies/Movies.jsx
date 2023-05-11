@@ -29,6 +29,18 @@ const Movies = () => {
       </Box>
     );
   }
+  if (error) {
+    console.log("error in Movies.jsx", error);
+    return (
+      <Box display="flex" alignItems="center" mt="20px">
+        <Typography variant="h4">
+          Error fetching movies
+          <br />
+          Please try again
+        </Typography>
+      </Box>
+    );
+  }
   if (!data?.results?.length) {
     return (
       <Box>
@@ -50,18 +62,6 @@ const Movies = () => {
         >
           <img src={frown} alt="no recommendations" width="300px" />
         </Box>
-      </Box>
-    );
-  }
-  if (error) {
-    console.log("error in Movies.jsx", error);
-    return (
-      <Box display="flex" alignItems="center" mt="20px">
-        <Typography variant="h4">
-          Error fetching movies
-          <br />
-          Please try again
-        </Typography>
       </Box>
     );
   }

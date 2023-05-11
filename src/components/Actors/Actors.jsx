@@ -17,8 +17,11 @@ const Actors = () => {
     isFetching: isActorFetching,
     error: actorError,
   } = useGetActorDetailsQuery(id);
-  const { data: movies, isFetching: isMoviesFetching,error: moviesError } =
-    useGetMoviesByActorQuery({ id, page });
+  const {
+    data: movies,
+    isFetching: isMoviesFetching,
+    error: moviesError,
+  } = useGetMoviesByActorQuery({ id, page });
   const classes = useStyles();
   if (isActorFetching || isMoviesFetching) {
     return (
@@ -117,7 +120,9 @@ const Actors = () => {
         >
           Meowies
         </Typography>
-        {movies && <MoviesList movies={movies} numberOfMovies={12} />}
+        {movies && (
+          <MoviesList movies={movies} numberOfMovies={12} />
+        )}
         <Pagination
           currentPage={page}
           setPage={setPage}
