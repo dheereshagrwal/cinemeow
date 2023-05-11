@@ -31,9 +31,10 @@ import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { MoviesList } from "..";
 import { userSelector } from "../../features/auth";
 import frown from "../../assets/images/frown.png";
+import { fetchToken } from "../../utils";
 const MovieInformation = () => {
   const navigate = useNavigate();
-  const { user } = useSelector(userSelector);
+  const { isAuthenticated,user } = useSelector(userSelector);
   const { id } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -292,7 +293,7 @@ const MovieInformation = () => {
                 style={{ fontFamily: "sora, sans-serif" }}
               >
                 <Button
-                  onClick={addToFavorites}
+                  onClick={isAuthenticated ? addToFavorites : fetchToken}
                   endIcon={
                     !isMovieInFavorites ? (
                       <FavoriteBorderOutlined />
@@ -307,8 +308,9 @@ const MovieInformation = () => {
                 >
                   {isMovieInFavorites ? "unfavorite" : "favorite"}
                 </Button>
+
                 <Button
-                  onClick={addToWatchlist}
+                  onClick={isAuthenticated ? addToWatchlist : fetchToken}
                   endIcon={isMovieInWatchlist ? "-" : "+"}
                   style={{
                     fontFamily: "sora, sans-serif",
