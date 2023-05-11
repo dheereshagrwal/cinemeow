@@ -94,7 +94,7 @@ const MovieInformation = () => {
     setIsMovieInWatchlist((prev) => !prev);
   };
 
-  if (isFetching) {
+  if (isFetching || isRecommendationsFetching) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
         <CircularProgress size="8rem" />
@@ -359,7 +359,11 @@ const MovieInformation = () => {
               alignItems: "center",
             }}
           >
-            <img src={frown} alt="no recommendations" width="300px" />
+            <img
+              src={frown}
+              alt="no recommendations"
+              className={`animate__animated animate__rollIn ${classes.frownImage}`}
+            />
           </Box>
         )}
       </Box>

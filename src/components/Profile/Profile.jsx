@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box, Typography, Button, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../features/auth";
 import { ExitToApp } from "@mui/icons-material";
@@ -10,20 +11,26 @@ import useStyles from "./styles";
 const Profile = () => {
   const classes = useStyles();
   const { user } = useSelector(userSelector);
-  const { data: favoriteMovies, refetch: refetchFavoriteMovies } =
-    useGetListQuery({
-      listName: "favorite/movies",
-      accountId: user.id,
-      sessionId: localStorage.getItem("session_id"),
-      page: 1,
-    });
-  const { data: watchlistMovies, refetch: refetchWatchlistMovies } =
-    useGetListQuery({
-      listName: "watchlist/movies",
-      accountId: user.id,
-      sessionId: localStorage.getItem("session_id"),
-      page: 1,
-    });
+  const {
+    data: favoriteMovies,
+    refetch: refetchFavoriteMovies,
+    isFetching: isFavoriteMoviesFetching,
+  } = useGetListQuery({
+    listName: "favorite/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1,
+  });
+  const {
+    data: watchlistMovies,
+    refetch: refetchWatchlistMovies,
+    isFetching: isWatchlistMoviesFetching,
+  } = useGetListQuery({
+    listName: "watchlist/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1,
+  });
 
   useEffect(() => {
     refetchFavoriteMovies();
@@ -34,6 +41,14 @@ const Profile = () => {
     localStorage.clear();
     window.location.href = "/";
   };
+  if (isFavoriteMoviesFetching || isWatchlistMoviesFetching) {
+    return (
+      <Box display="flex" justifyContent="center">
+        <CircularProgress size="8rem" />
+      </Box>
+    );
+  }
+
   return (
     <Box>
       <Box display="flex" justifyContent="space-between">

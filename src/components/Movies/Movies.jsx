@@ -9,9 +9,11 @@ import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../services/TMDB";
 import { MoviesList, Pagination, FeaturedMovie } from "..";
 import frown from "../../assets/images/frown.png";
+import useStyles from "./styles";
 
 const Movies = () => {
   const [page, setPage] = useState(1);
+  const classes = useStyles();
   const { genreIdOrCategoryName, searchQuery } = useSelector(
     (state) => state.currentGenreOrCategory
   );
@@ -60,7 +62,11 @@ const Movies = () => {
             alignItems: "center",
           }}
         >
-          <img src={frown} alt="no recommendations" width="300px" />
+          <img
+            src={frown}
+            alt="no meowies found"
+            className={`animate__animated animate__rollIn ${classes.frownImage}`}
+          />
         </Box>
       </Box>
     );
