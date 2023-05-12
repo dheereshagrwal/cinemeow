@@ -34,13 +34,20 @@ import frown from "../../assets/images/frown.png";
 import { fetchToken } from "../../utils";
 const MovieInformation = () => {
   const navigate = useNavigate();
-  const { isAuthenticated,user } = useSelector(userSelector);
+  const { isAuthenticated, user } = useSelector(userSelector);
   const { id } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   const { data, isFetching, error } = useGetMovieQuery(id);
+
+  const {
+    data: recommendations,
+    isFetching: isRecommendationsFetching,
+    error: isRecommendationsError,
+  } = useGetRecommendationsQuery({ movie_id: id, list: "/recommendations" });
+
   const { data: favoriteMovies } = useGetListQuery({
     listName: "favorite/movies",
     accountId: user.id,
@@ -53,12 +60,6 @@ const MovieInformation = () => {
     sessionId: localStorage.getItem("session_id"),
     page: 1,
   });
-  const {
-    data: recommendations,
-    isFetching: isRecommendationsFetching,
-    error: isRecommendationsError,
-  } = useGetRecommendationsQuery({ movie_id: id, list: "/recommendations" });
-
   const [isMovieInFavorites, setIsMovieInFavorites] = useState(false);
   const [isMovieInWatchlist, setIsMovieInWatchlist] = useState(false);
 

@@ -1,9 +1,7 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
-import useStyles from "./styles";
 import { Movie } from "..";
 const RatedCards = ({ title, data }) => {
-  const classes = useStyles();
   return (
     <Box>
       <Typography
@@ -13,7 +11,7 @@ const RatedCards = ({ title, data }) => {
       >
         {title}
       </Typography>
-      <Box display="flex" flexWrap="wrap" className={classes.container}>
+      <Box display="flex" flexWrap="wrap">
         {data?.results?.map((movie, i) => (
           <Movie key={movie.id} movie={movie} i={i} />
         ))}
