@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@alan-ai/alan-sdk-web": "^1.8.43",
+    "@alan-ai/alan-sdk-web": "^1.8.44",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@mui/icons-material": "^5.11.16",
