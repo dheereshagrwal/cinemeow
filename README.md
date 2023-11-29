@@ -1,43 +1,36 @@
-Cinemeow
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Cinemeow is a web app that provides movie recommendations and showcases movies with a cat theme. It uses Material UI for the UI design, Alan AI for voice commands, ReactJS for the frontend, and TMDB movie API for movie data.
-Features
+## Getting Started
 
-    Discover movies with a cat theme: Cinemeow recommends movies that feature cats prominently, or have a feline theme in their story.
-    Search and browse movies: You can search for movies by title or genre, and browse the movie collection by release date, rating, or popularity.
-    Get movie details: Cinemeow provides detailed information about each movie, including cast, crew, trailers, reviews, and ratings.
-    Voice commands: You can interact with Cinemeow using voice commands, powered by Alan AI. For example, you can ask Cinemeow to recommend a cat movie, or to show the trailer for a specific movie.
-    Save and share favorites: You can save your favorite movies to a list, and share them with your friends via social media.
+First, run the development server:
 
-Demo
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-You can try out Cinemeow at https://www.cinemeow.com.
-Installation
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To run Cinemeow locally, you need to have Node.js and npm installed. Then, clone the repository and install the dependencies:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-bash
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-git clone https://github.com/your-username/cinemeow.git
-cd cinemeow
-npm install
+## Learn More
 
-Next, create a .env file in the root directory, and add your TMDB API key and Alan AI credentials:
+To learn more about Next.js, take a look at the following resources:
 
-makefile
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-REACT_APP_TMDB_API_KEY=your-tmdb-api-key
-REACT_APP_ALAN_KEY=your-alan-key
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-Finally, start the development server:
+## Deploy on Vercel
 
-sql
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-npm start
-
-Contributing
-
-Contributions are welcome! Please read the contribution guidelines for details.
-License
-
-This project is licensed under the MIT License.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
